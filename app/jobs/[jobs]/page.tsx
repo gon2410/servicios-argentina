@@ -28,10 +28,10 @@ interface User {
 const page = async({ params }: {params: Promise<{ jobs: string }>}) => {
     const id = (await params).jobs;
 
-    const serviceResponse = await axios.get(`http://localhost:3000/api/services?action=service&userId=&serviceId=${id}`);
+    const serviceResponse = await axios.get(`https://servicios-argentina-peot.vercel.app/api/services?action=service&userId=&serviceId=${id}`);
 	const service: Service = serviceResponse.data;
 
-    const userResponse = await axios.get(`http://localhost:3000/api/users?action=user&userId=${service.user}`);
+    const userResponse = await axios.get(`https://servicios-argentina-peot.vercel.app/api/users?action=user&userId=${service.user}`);
     const user: User = userResponse.data;
 
     return (        
