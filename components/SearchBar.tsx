@@ -30,7 +30,7 @@ export default function SearchBar() {
 		const formData = new FormData(e.currentTarget);
 		
 		try {
-			const usersResponse = await axios.get(`http://localhost:3000/api/users?action=userbyname&userId=&query=${formData.get("query")}`);
+			const usersResponse = await axios.get(`https://servicios-argentina-peot.vercel.app/api/users?action=userbyname&userId=&query=${formData.get("query")}`);
 			const providers: User[] = await usersResponse.data;
 			setProvidersArray(providers);
 		} catch (error) {

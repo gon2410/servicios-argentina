@@ -20,7 +20,7 @@ interface Provider {
 
 const ProviderList = async () => {
 	try {
-		const res = await axios.get("http://localhost:3000/api/users?action=all&userId=");
+		const res = await axios.get("https://servicios-argentina-peot.vercel.app/api/users?action=all&userId=");
 		const providers: Provider[] = await res.data;
 		return (
 			<div className="flex mt-10">

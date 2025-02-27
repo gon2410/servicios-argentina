@@ -21,7 +21,7 @@ const page = async () => {
 	const session = await auth();
 	if (session) {
 		try {
-			const res = await axios.get(`http://localhost:3000/api/services?action=users&userId=${session?.user?.id}&serviceId=`);
+			const res = await axios.get(`https://servicios-argentina-peot.vercel.app/api/services?action=users&userId=${session?.user?.id}&serviceId=`);
 			const services: Service[] = res.data;
 			return (
 				<>

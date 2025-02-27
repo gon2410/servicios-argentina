@@ -47,7 +47,7 @@ const EditProfile = ({userId, name, ocupation, location, bio}: Props) => {
 
     const onSubmit = async (values: z.infer<typeof UpdateProfileSchema>) => {
         try {
-			const response = await axios.patch("http://localhost:3000/api/users", {
+			const response = await axios.patch("https://servicios-argentina-peot.vercel.app/api/users", {
                 userId: userId,
 				newName: values.name,
 				newOcupation: values.ocupation,

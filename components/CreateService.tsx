@@ -45,7 +45,7 @@ const CreateService = ({ userId }: Props) => {
 
 	const onSubmit = async (values: z.infer<typeof ServiceSchema>) => {
 		try {
-			const response = await axios.post(`http://localhost:3000/api/services?userId=${userId}`, {
+			const response = await axios.post(`https://servicios-argentina-peot.vercel.app/api/services?userId=${userId}`, {
 				title: values.title,
 				desc: values.desc,
 				price: values.price
