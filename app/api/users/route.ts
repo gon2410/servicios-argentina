@@ -45,8 +45,10 @@ export const GET = async(request: Request) => {
         };
 
 
-    } catch (error: any) {
-        return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500});
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500})
+        }
     };
 };
 
@@ -70,9 +72,11 @@ export const POST = async (request: Request) => {
         const savedUser = await newUser.save();
 
         return new NextResponse(JSON.stringify({message: "User created", user: savedUser}))
-    } catch (error: any) {
-        return new NextResponse(JSON.stringify({message: error.message}), {status: 500});
-    }
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500})
+        }
+    };
 }
 
 export const PATCH = async(request: Request) => {
@@ -101,9 +105,11 @@ export const PATCH = async(request: Request) => {
 
         return new NextResponse(JSON.stringify({message: "User updated.", user: updatedUser}), {status: 200});
 
-    } catch (error: any) {
-        return new NextResponse("Error updating user" + error.message, {status: 500});
-    }
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500})
+        }
+    };
 }
 
 export const DELETE = async(request: Request) => {
@@ -130,8 +136,9 @@ export const DELETE = async(request: Request) => {
 
         return new NextResponse(JSON.stringify({message: "User deleted.", user: deletedUser}), {status: 200});
 
-    } catch (error: any) {
-        return new NextResponse("Error deleting user" + error.message, {status: 500});
-        
-    }
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500})
+        }
+    };
 }

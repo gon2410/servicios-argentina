@@ -52,8 +52,10 @@ export const GET = async (request: Request) => {
         };
 
 
-    } catch (error: any) {
-        return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500});
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500})
+        }
     };
 };
 
@@ -86,7 +88,9 @@ export const POST = async(request: Request) => {
 
         await newService.save();
         return new NextResponse(JSON.stringify({message: "Service created", user: newService}))
-    } catch (error: any) {
-        return new NextResponse("Error in creating service" + error.message, {status: 500})
-    }
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Algo no salio bien. Mas detalles: " + error.message, {status: 500})
+        }
+    };
 }

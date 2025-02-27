@@ -6,7 +6,6 @@ import {
 	Card,
 	CardContent,
 	CardDescription,
-	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
@@ -64,6 +63,7 @@ const page = async () => {
 				</>
 			)
 		} catch (error) {
+			console.log(error)
 			return (
 				<div className="text-center">
 					<p>Algo salió mal.</p>

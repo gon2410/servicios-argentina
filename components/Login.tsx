@@ -10,12 +10,11 @@ import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 
 const Login = () => {
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("")
     const router = useRouter();
 
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -83,7 +82,7 @@ const Login = () => {
                     />
                 </div>
                 <FormError message={error}/>
-                <FormSuccess message={success} />
+                {/* <FormSuccess message={success} /> */}
                 <Button type="submit" className="w-full">
                     Iniciar Sesión
                 </Button>

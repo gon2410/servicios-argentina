@@ -39,6 +39,7 @@ const page = async({ params }: {params: Promise<{ provider: string }>}) => {
                 </div>
             )
         } catch (error) {
+            console.log(error);
             <div className="text-center">
                 <p>Algo salió nal</p>
             </div>

@@ -3,7 +3,6 @@ import Link from 'next/link'
 import axios from 'axios';
 import {
 	Card,
-	CardContent,
 	CardDescription,
 	CardFooter,
 	CardHeader,
@@ -45,6 +44,7 @@ const ProviderList = async () => {
 			</div>
 		)
 	} catch (error) {
+		console.log(error);
 		return (
 			<p>Algo salió mal...</p>
 		)

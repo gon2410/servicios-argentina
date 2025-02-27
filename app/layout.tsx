@@ -1,11 +1,11 @@
 import "./globals.css"
-import { auth, signIn, signOut } from "@/auth";
+import { auth, signOut } from "@/auth";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import NavLink from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
-import { FcGoogle, FcPlus } from "react-icons/fc";
+import { FcPlus } from "react-icons/fc";
 import {
 	DropdownMenu,
 	DropdownMenuContent,

@@ -1,16 +1,16 @@
-import connect from "@/lib/db"
+import connect from "@/lib/connect";
 import User from "@/lib/models/user";
 import Service from "@/lib/models/service";
 import { NextResponse } from "next/server"
 import { Types } from "mongoose";
 
-export const PATCH = async (request: Request, context: { params: any }) => {
-    const serviceId = context.params.category;
+export const PATCH = async (request: Request) => {
     try {
         const body = await request.json();
         const { title } = body;
 
         const {searchParams} = new URL(request.url);
+        const serviceId = searchParams.get("serviceId");
         const userId = searchParams.get("userId");
 
         if (!userId || !Types.ObjectId.isValid(userId)) {
@@ -43,8 +43,10 @@ export const PATCH = async (request: Request, context: { params: any }) => {
 
         return new NextResponse(JSON.stringify({message: "Service updated", category: updatedService}))
 
-    } catch (error: any) {
-        return new NextResponse("Error in fetching categories" + error.message, {status: 500})
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Error in fetching categories" + error.message, {status: 500})
+        }
     }
 }
 
@@ -78,7 +80,9 @@ export const DELETE = async (request: Request, context: { params: any }) => {
         const deletedService = await Service.findByIdAndDelete(serviceId);
         return new NextResponse(JSON.stringify({message: "Service deleted", category: deletedService}));
 
-    } catch (error: any) {
-        return new NextResponse("Error in deleting service" + error.message, {status: 500});
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return new NextResponse("Error in deleting categories: " + error.message, {status: 500})
+        }
     }
 }
