@@ -28,7 +28,7 @@ const Register = () => {
 
     const onSubmit = async(values: z.infer<typeof RegisterSchema>) => {
         try {
-            const response = await axios.post("http://127.0.0.1:3000/api/users", {
+            const response = await axios.post("https://servicios-argentina-peot.vercel.app/api/users", {
                 name: values.name,
                 email: values.email,
                 password: values.password
