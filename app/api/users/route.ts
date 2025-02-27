@@ -3,7 +3,6 @@ import User from "@/lib/models/user";
 import { NextResponse } from "next/server"
 import { Types } from "mongoose";
 import bcrypt from "bcryptjs";
-const ObjectId = require("mongoose").Types.ObjectId;
 
 export const GET = async(request: Request) => {
     try {
@@ -94,7 +93,7 @@ export const PATCH = async(request: Request) => {
         }
 
         const updatedUser = await User.findOneAndUpdate(
-            {_id: new ObjectId(userId)},
+            {_id: new Types.ObjectId(userId)},
             { $set: { name: newName, ocupation: newOcupation, location: newLocation, bio: newBio } },
             {new: true}
         )

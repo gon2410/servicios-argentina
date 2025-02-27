@@ -1,5 +1,5 @@
 import { signIn, auth } from "@/auth";
-import { Card, CardContent, CardFooter, CardHeader, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Header } from "@/components/auth/header";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";

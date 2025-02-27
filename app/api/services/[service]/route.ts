@@ -50,11 +50,11 @@ export const PATCH = async (request: Request) => {
     }
 }
 
-export const DELETE = async (request: Request, context: { params: any }) => {
-    const serviceId = context.params.category;
+export const DELETE = async (request: Request) => {
     try {
         const {searchParams} = new URL(request.url);
         const userId = searchParams.get("userId");
+        const serviceId = searchParams.get("serviceId");
 
         if (!userId || !Types.ObjectId.isValid(userId)) {
             return new NextResponse(JSON.stringify({message: "ID not found or invalid."}), {status: 400});
