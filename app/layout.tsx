@@ -65,7 +65,7 @@ export default async function RootLayout({children,}: Readonly<{children: React.
 									<DropdownMenu>
 										<DropdownMenuTrigger>
 											<Image
-												src={session.user?.image as string}
+												src={session.user?.image as string || "/placeholder.svg"}
 												alt="profile_image"
 												width={30}
 												height={30}

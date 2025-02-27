@@ -12,7 +12,7 @@ interface Service {
 
 const JobList = async () => {
 	try {
-		const res = await axios.get(process.env.URL + "/api/services?action=all&userId=&serviceId=");
+		const res = await axios.get("http://localhost:3000/api/services?action=all&userId=&serviceId=");
 		const services: Service[] = res.data;
 
 		return (

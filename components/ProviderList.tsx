@@ -21,7 +21,7 @@ interface Provider {
 
 const ProviderList = async () => {
 	try {
-		const res = await axios.get(process.env.URL + "/api/users?action=all&userId=");
+		const res = await axios.get("http://localhost:3000/api/users?action=all&userId=");
 		const providers: Provider[] = await res.data;
 		return (
 			<div className="flex mt-10">

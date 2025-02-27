@@ -11,7 +11,7 @@ const page = async () => {
 					<div className="p-8">
 						<div className="mb-6 flex flex-row justify-center">
 							<Image
-								src={session?.user?.image as string}
+								src={session?.user?.image as string || "/placeholder.svg"}
 								alt="profile_image"
 								width={150}
 								height={150}

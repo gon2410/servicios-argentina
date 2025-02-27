@@ -49,6 +49,7 @@ export default function SearchBar() {
 					name="query"
 					className="w-full p-4 rounded-full shadow-md"
 					placeholder="Buscar servicios o proveedores..."
+					required
 				/>
 				<Button
 					type="submit"
@@ -64,7 +65,7 @@ export default function SearchBar() {
 					<Card key={provider._id} className="w-80 h-64 flex flex-col justify-between">
 						<CardHeader className="flex-1">
 							<CardTitle className="flex items-center space-x-2">
-								<Image src={provider.image} alt={provider.name} width={40} height={40} className="w-10 h-10 object-cover rounded-full" />
+								<Image src={provider.image || "/placeholder.svg"} alt={provider.name} width={40} height={40} className="w-10 h-10 object-cover rounded-full" />
 								<h3 className="text-lg font-semibold">{provider.name}</h3>
 							</CardTitle>
 							<CardDescription>{provider.location}</CardDescription>

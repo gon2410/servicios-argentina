@@ -28,12 +28,12 @@ const Login = () => {
 
     const onSubmit = async(values: z.infer<typeof LoginSchema>) => {
         try {
-            console.log(values)
             const response = await signIn("credentials",{
                 email: values.email,
                 password: values.password,
                 redirect: false
             })
+            console.log(response)
 
             if (response?.error) {
                 return setError(response.error as string);
