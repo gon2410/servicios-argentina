@@ -8,7 +8,7 @@ const page = async () => {
         const supabase = await createClient();
         const { data: user } = await supabase.auth.getUser();
         if (user.user) {
-            const { data: services } = await supabase.from('services').select('*').eq('owner', user.user.id);
+            const { data: services } = await supabase.from('services').select('*').eq('owner', user.user.email);
             if (services) {
                 return (
                     <>  
