@@ -11,6 +11,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
+import { RxAvatar } from "react-icons/rx";
 
 export default async function AuthButton() {
   	const supabase = await createClient();
@@ -33,27 +34,37 @@ export default async function AuthButton() {
 			<DropdownMenuContent>
 				<DropdownMenuItem><Link href="/profile">Mi Perfil</Link></DropdownMenuItem>
 				<DropdownMenuItem><Link href="/myservices">Mis servicios</Link></DropdownMenuItem>
-				<DropdownMenuSeparator></DropdownMenuSeparator>
+				<DropdownMenuSeparator />
 				<DropdownMenuItem><Link href="/services">Servicios</Link></DropdownMenuItem>
 				<DropdownMenuItem><Link href="/providers">Proveedores</Link></DropdownMenuItem>
-				<DropdownMenuSeparator></DropdownMenuSeparator>
-				<DropdownMenuLabel>
+				<DropdownMenuSeparator />
+				<DropdownMenuItem>
 					<form action={signOutAction}>
 						<Button type="submit" variant={"destructive"}>
-							Salir
+							Cerrar Sesion
 						</Button>
 					</form>
-				</DropdownMenuLabel>
+				</DropdownMenuItem>
 			</DropdownMenuContent>
    		</DropdownMenu>
   ) : (
-    <div className="flex gap-2">
-		<Button asChild size="sm" variant={"outline"}>
-			<Link href="/sign-in">Iniciar sesión</Link>
-		</Button>
-		<Button asChild size="sm" variant={"default"}>
-			<Link href="/sign-up">Crear cuenta</Link>
-		</Button>
-    </div>
+		<DropdownMenu>
+			<DropdownMenuTrigger>
+				<RxAvatar className="h-5 w-5" />
+			</DropdownMenuTrigger>
+			<DropdownMenuContent>
+				<DropdownMenuItem>
+					<Button asChild size="sm" variant={"outline"}>
+						<Link href="/sign-in">Iniciar sesión</Link>
+					</Button>
+				</DropdownMenuItem>
+				<DropdownMenuSeparator />
+				<DropdownMenuItem>
+					<Button asChild size="sm" variant={"default"}>
+						<Link href="/sign-up">Crear cuenta</Link>
+					</Button>
+				</DropdownMenuItem>
+			</DropdownMenuContent>
+		</DropdownMenu>
   );
 }
