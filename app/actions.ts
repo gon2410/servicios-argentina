@@ -32,6 +32,10 @@ export const signUpAction = async (formData: FormData) => {
 		console.error(error.code + " " + error.message);
 		return encodedRedirect("error", "/sign-up", error.message);
 	} else {
+		const { error } = await supabase.from('profiles').insert([{owner: email}]);
+		if (error) {
+			console.log(error);
+		}
 		return encodedRedirect(
 			"success",
 			"/sign-up",

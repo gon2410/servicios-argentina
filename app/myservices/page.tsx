@@ -35,7 +35,7 @@ const page = async () => {
                             ))}
                         </div>
                         
-                        <CreateService owner={user.user.id}/>
+                        <CreateService owner={user.user.email as string}/>
                     </> 
                 )
             }
