@@ -32,7 +32,7 @@ export default async function AuthButton() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuItem><Link href="/profile">Mi Perfil</Link></DropdownMenuItem>
-				<DropdownMenuItem><Link href="/createservice">Mis servicios</Link></DropdownMenuItem>
+				<DropdownMenuItem><Link href="/myservices">Mis servicios</Link></DropdownMenuItem>
 				<DropdownMenuSeparator></DropdownMenuSeparator>
 				<DropdownMenuItem><Link href="/services">Servicios</Link></DropdownMenuItem>
 				<DropdownMenuItem><Link href="/providers">Proveedores</Link></DropdownMenuItem>
