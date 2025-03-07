@@ -54,7 +54,7 @@ export const signInAction = async (formData: FormData) => {
 		return encodedRedirect("error", "/sign-in", error.message = "Credenciales incorrectas");
 	}
 
-	return redirect("/protected");
+	return redirect("/");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
@@ -172,4 +172,21 @@ export const updateProfileAction = async (formData: FormData) => {
 	}
 
 	return { success: true, message: "Perfil actualizado"}
+};
+
+export const createServiceAction = async (formData: FormData) => {
+	const supabase = await createClient();
+
+	const newTitle = formData.get("title") as string;
+	const newPrice = formData.get("price") as string;
+	const newDescription = formData.get("price") as string;
+	const newOwner = formData.get("owner") as string;
+
+	const { error } = await supabase.from('services').insert([{ title: newTitle, price: newPrice, description: newDescription, owner: newOwner }]);
+
+	if (error) {
+		return {success: false, message: "No se pudo crear el servicio."}
+	}
+
+	return { success: true, message: "Servicio creado exitosamente" }
 };

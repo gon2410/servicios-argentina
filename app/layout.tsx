@@ -4,12 +4,8 @@ import Link from "next/link";
 import HeaderMenu from "@/components/header-menu";
 import "./globals.css";
 
-const defaultUrl = process.env.VERCEL_URL
-  	? `https://${process.env.VERCEL_URL}`
-  	: "http://localhost:3000";
-
 export const metadata = {
-  	metadataBase: new URL(defaultUrl),
+  	metadataBase: "https://localhost:3000/",
   	title: "Servicios Argentina",
   	description: "Aplicación para proveedores de servicios tanto publicos como privados en Argentina",
 };

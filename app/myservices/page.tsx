@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import EditService from "@/components/edit-service";
+import CreateService from "@/components/create-service";
 
 const page = async () => {
     try {
@@ -33,6 +34,8 @@ const page = async () => {
                                 </div>
                             ))}
                         </div>
+                        
+                        <CreateService owner={user.user.id}/>
                     </> 
                 )
             }
