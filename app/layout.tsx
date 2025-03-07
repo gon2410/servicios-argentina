@@ -5,7 +5,7 @@ import HeaderMenu from "@/components/header-menu";
 import "./globals.css";
 
 export const metadata = {
-  	metadataBase: "https://localhost:3000/",
+  	metadataBase: process.env.URL,
   	title: "Servicios Argentina",
   	description: "Aplicación para proveedores de servicios tanto publicos como privados en Argentina",
 };
