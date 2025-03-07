@@ -44,7 +44,7 @@ const CreateService = ({owner}: Props) => {
     return (
         <>
             <h1 className="text-2xl font-bold mt-10">Crear servicio</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="space-y-4">
                 
                 <Input name="title" placeholder="Reparacion de cañeria" required />
                 <Input name="price" placeholder="0" type="number" required />
