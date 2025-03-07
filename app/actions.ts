@@ -183,7 +183,7 @@ export const createServiceAction = async (formData: FormData) => {
 
 	const newTitle = formData.get("title") as string;
 	const newPrice = formData.get("price") as string;
-	const newDescription = formData.get("price") as string;
+	const newDescription = formData.get("description") as string;
 	const newOwner = formData.get("owner") as string;
 
 	const { error } = await supabase.from('services').insert([{ title: newTitle, price: newPrice, description: newDescription, owner: newOwner }]);
