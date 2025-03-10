@@ -28,7 +28,6 @@ const CreateService = ({owner}: Props) => {
             if (result.success) {
                 setError("");
                 setSuccess(result.message);
-                formData.delete("title");
                 router.refresh();
             } else {
                 setSuccess("");
@@ -55,9 +54,9 @@ const CreateService = ({owner}: Props) => {
                 :
                     <Button type="submit" variant={"outline"}>Crear</Button>
                 }
-            </form>
-            <FormError message={error} />
-            <FormSuccess message={success}/>
+                <FormError message={error} />
+                <FormSuccess message={success}/>
+            </form> 
         </>
     )
 }

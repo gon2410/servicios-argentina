@@ -1,4 +1,4 @@
-import { signInAction } from "@/app/actions";
+import { signInAction, googleAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { FcGoogle } from "react-icons/fc";
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
   	const searchParams = await props.searchParams;
@@ -23,6 +25,11 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             			<h1 className="text-3xl font-semibold">Servicios Argentina</h1>
             			<p className="text-muted-foreground text-sm">Bienvenido de vuelta!</p>
         			</div>
+					<div className="text-center">
+						<form>
+							<Button type="submit" formAction={googleAction} variant={"outline"}><FcGoogle className="h-5 w-5 me-1"/>Google</Button>
+						</form>
+					</div>
 				</CardHeader>
 				<CardContent>
 					<form className="flex-1 flex flex-col min-w-64">
@@ -33,8 +40,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
 								<Label htmlFor="password">Contraseña</Label>
 								<Link
 									className="text-xs text-foreground underline"
-									href="/forgot-password"
-								>
+									href="/forgot-password">
 									Olvidaste la contraseña?
 								</Link>
 							</div>
@@ -58,6 +64,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
 						Crear cuenta
 						</Link>
 					</p>
+	
 				</CardFooter>
 			</Card>
 		</div>

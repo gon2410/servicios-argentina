@@ -2,10 +2,16 @@ import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 const page = async () => {
-    const supabase = await createClient();
-    const { data: profiles } = await supabase.from('profiles').select('*');
+    try {
+        const supabase = await createClient();
+        if (!supabase) throw new Error('No pudimos conectarnos a la base de datos. Intente recargando la pagina.');
 
-    if (profiles) {
+        const { data: profiles, error } = await supabase.from('profiles').select('id, name, ocupation, location');
+        if (error) throw new Error("Algo salió mal buscando proveedores");
+        if (!profiles) throw new Error("Algo salió mal buscando proveedores");
+
+        if (profiles?.length == 0) throw new Error("No se encontraron proveedores");
+
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {profiles.map((profile) => (
@@ -35,8 +41,14 @@ const page = async () => {
                 ))}
             </div>
         )
+
+    } catch (error: unknown) {
+        return (
+            <div className="text-center">
+                <h1>{error instanceof Error ? error.message : "Algo salió mal"}</h1>
+            </div>
+        )
     }
-    
 }
 
 export default page

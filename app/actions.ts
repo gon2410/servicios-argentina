@@ -61,6 +61,20 @@ export const signInAction = async (formData: FormData) => {
 	return redirect("/");
 };
 
+export const googleAction = async() => {
+	const supabase = await createClient();
+	const { data, error } = await supabase.auth.signInWithOAuth({
+		provider: "google",
+		options: {
+		  redirectTo: 'http://example.com/auth/callback',
+		},
+	})
+	  
+	if (data.url) {
+	redirect(data.url) // use the redirect API for your server framework
+	}
+}
+
 export const forgotPasswordAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const supabase = await createClient();
@@ -105,7 +119,7 @@ export const resetPasswordAction = async (formData: FormData) => {
 		encodedRedirect(
 		"error",
 		"/protected/reset-password",
-		"Password and confirm password are required",
+		"Se requiere la nueva contraseña y la confirmacion",
 		);
 	}
 
@@ -113,7 +127,7 @@ export const resetPasswordAction = async (formData: FormData) => {
 		encodedRedirect(
 		"error",
 		"/protected/reset-password",
-		"Passwords do not match",
+		"Las contraseñas no coinciden",
 		);
 	}
 
@@ -125,11 +139,11 @@ export const resetPasswordAction = async (formData: FormData) => {
 		encodedRedirect(
 		"error",
 		"/protected/reset-password",
-		"Password update failed",
+		"Error al resetar la contraseña",
 		);
 	}
 
-	encodedRedirect("success", "/protected/reset-password", "Password updated");
+	encodedRedirect("success", "/protected/reset-password", "Contraseña reseteada");
 };
 
 export const signOutAction = async () => {

@@ -6,13 +6,19 @@ import CreateService from "@/components/create-service";
 const page = async () => {
     try {
         const supabase = await createClient();
+        if (!supabase) throw new Error("No pudimos conectarnos a la base de datos");
+
         const { data: user } = await supabase.auth.getUser();
-        if (user.user) {
-            const { data: services } = await supabase.from('services').select('*').eq('owner', user.user.email);
-            if (services) {
-                return (
-                    <>  
-                        <h1 className="text-2xl font-bold">Mis servicios</h1>
+        if (!user.user) throw new Error("No estas logueado. No tenes acceso.");
+
+        const { data: services, error } = await supabase.from('services').select('*').eq('owner', user.user.email);
+        if (error) throw new Error("Algo salió mal buscando los servicios.");
+        if (!services) throw new Error("No se encontraron servicios.");
+
+        return (
+            <>  
+                <h1 className="text-2xl font-bold">Mis servicios</h1>
+                    {services.length != 0 ?
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {services.map((service) => (
                                 <div key={service.id} className="bg-white shadow rounded-lg overflow-hidden m-2 flex flex-col h-full">
@@ -34,16 +40,19 @@ const page = async () => {
                                 </div>
                             ))}
                         </div>
-                        
-                        <CreateService owner={user.user.email as string}/>
-                    </> 
-                )
-            }
-        }
-    } catch (error) {
+                    :
+                        <div className="text-center">
+                            <h1>No tenés servicios por el momento. Podes crear uno en el formulario mas abajo</h1>
+                        </div>
+                    }
+
+                <CreateService owner={user.user.email as string}/>
+            </> 
+        )
+    } catch (error: unknown) {
         return (
             <div className="text-center">
-                <h1>Algo salió mal</h1>
+                <h1>{error instanceof Error ? error.message : 'Algo salió mal'}</h1>
             </div>
         )
     }
