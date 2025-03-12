@@ -25,11 +25,11 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             			<h1 className="text-3xl font-semibold">Servicios Argentina</h1>
             			<p className="text-muted-foreground text-sm">Bienvenido de vuelta!</p>
         			</div>
-					<div className="text-center">
+					{/* <div className="text-center">
 						<form>
 							<Button type="submit" formAction={googleAction} variant={"outline"}><FcGoogle className="h-5 w-5 me-1"/>Google</Button>
 						</form>
-					</div>
+					</div> */}
 				</CardHeader>
 				<CardContent>
 					<form className="flex-1 flex flex-col min-w-64">

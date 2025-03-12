@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import EditProfile from "@/components/edit-profile";
+import EditProfilePic from "@/components/edit-profile-pic";
 
 const page = async () => {
     try {
@@ -19,12 +20,15 @@ const page = async () => {
                 <div className="p-8">
                     <div className="mb-6 flex flex-row justify-center">
                         <Image
-                            src={"/placeholder.svg"}
+                            src={`https://hbsnhpdrofauvbutkjhp.supabase.co/storage/v1/object/public/servicios-argentina/${profile.image_url}` || "/placeholder.svg"}
                             alt="profile_image"
                             width={150}
                             height={150}
-                            className="rounded-full"
+                            className="rounded"
                         />
+                    </div>
+                    <div className="text-center mb-5">
+                        <EditProfilePic email={user.user.email as string}/>
                     </div>
                     <h2 className="text-2xl font-bold text-center mb-2">{profile.name}</h2>
                     <p className="text-gray-600 text-center mb-1">{profile.ocupation}</p>

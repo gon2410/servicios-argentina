@@ -208,3 +208,38 @@ export const createServiceAction = async (formData: FormData) => {
 
 	return { success: true, message: "Servicio creado exitosamente" }
 };
+
+export const updateProfilePicAction = async (formData: FormData) => {
+	try {
+		const file = formData.get("upload_file") as File;
+		const email = formData.get("email") as string;
+		
+		if (!file || !email) throw new Error("No se encontró un archivo o email.")
+
+		const supabase = await createClient()
+	
+		const URL = `${email}/${file.name}`;
+	
+		// retrieve URL in the image_url field in profile
+		const { data: imageURL, error: retrievingError } = await supabase.from("profiles").select("image_url").eq("owner", email).single();
+		if (retrievingError) throw new Error("Algo salió mal buscando la URL de la imagen en tu perfil.");
+
+		// removing image_url saved in supabase storage
+		const { error: removingError} = await supabase.storage.from("servicios-argentina").remove([imageURL?.image_url]);
+		if (removingError) throw new Error("Algo salió mal eliminando la imagen de la base de datos.");
+
+		// updating image_url in supabase storage
+		const { error: updatingStorageError } = await supabase.storage.from('servicios-argentina').upload(URL, file);
+		if (updatingStorageError) throw new Error("Algo salió mal actualizando la imagen en el storage.");
+
+		// updating URL in the image_url field in profile
+		const {error: updateError} = await supabase.from("profiles").update({image_url: URL}).eq("owner", email);
+		if (updateError) throw new Error("Algo salió mal actualizando la imagen");
+
+		return {success: true, message: "Imagen actualizada."}
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			return {success: false, message: error.message}
+		}
+	}
+};
