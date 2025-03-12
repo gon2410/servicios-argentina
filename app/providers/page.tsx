@@ -6,7 +6,7 @@ const page = async () => {
         const supabase = await createClient();
         if (!supabase) throw new Error('No pudimos conectarnos a la base de datos. Intente recargando la pagina.');
 
-        const { data: profiles, error } = await supabase.from('profiles').select('id, name, ocupation, location');
+        const { data: profiles, error } = await supabase.from('profiles').select('id, name, ocupation, location, image_url');
         if (error) throw new Error("Algo salió mal buscando proveedores");
         if (!profiles) throw new Error("Algo salió mal buscando proveedores");
 
@@ -18,7 +18,7 @@ const page = async () => {
                     <div key={profile.id} className="bg-white shadow rounded-lg overflow-hidden m-2 flex flex-col h-full">
                         <div className="flex flex-1 justify-between p-3">
                             <Image
-                                src={"/placeholder.svg"}
+                                src={`https://hbsnhpdrofauvbutkjhp.supabase.co/storage/v1/object/public/servicios-argentina/${profile.image_url}` || "/placeholder.svg"}
                                 alt={profile.name}
                                 width={50}
                                 height={50}

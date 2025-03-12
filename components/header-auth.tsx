@@ -19,17 +19,17 @@ export default async function AuthButton() {
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-
+	const {data: profile} = await supabase.from("profiles").select("image_url").eq("owner", user?.email).single();
   	return user ? (
    		<DropdownMenu>
 			<DropdownMenuTrigger>
 				<Image
-					src={"/placeholder.svg"}
+                    src={`https://hbsnhpdrofauvbutkjhp.supabase.co/storage/v1/object/public/servicios-argentina/${profile?.image_url}` || "/placeholder.svg"}
 					alt="profile_image"
 					width={30}
 					height={30}
 					className="rounded-full m-2"
-				/>	
+				/>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuItem><Link href="/profile">Mi Perfil</Link></DropdownMenuItem>

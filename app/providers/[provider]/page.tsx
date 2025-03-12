@@ -27,7 +27,7 @@ const page = async ({ params }: {params: Promise<{ provider: number }>}) => {
                 <CardHeader className="flex flex-row justify-between">
                     <CardTitle>
                         <Image
-                            src={"/placeholder.svg"}
+                            src={`https://hbsnhpdrofauvbutkjhp.supabase.co/storage/v1/object/public/servicios-argentina/${profile.image_url}` || "/placeholder.svg"}
                             alt={profile.name}
                             height={50}
                             width={50}
